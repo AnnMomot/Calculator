@@ -1,297 +1,174 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/button_clear"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/lightBlack"
     tools:context=".MainActivity">
 
-    <TableLayout
-        android:id="@+id/tableLayout"
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input"
-        app:layout_constraintVertical_bias="0.87">
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:padding="20dp"
+        tools:ignore="MissingClass">
 
-        <TableRow
+        <TextView
+            android:id="@+id/workingTextView"
             android:layout_width="match_parent"
-            android:layout_height="42dp">
+            android:layout_height="wrap_content"
+            android:text=""
+            android:maxLines="2"
+            android:lines="2"
+            android:textColor="@color/white"
+            android:textAlignment="textEnd"
+            android:textSize="25sp"
+            app:layout_constraintBottom_toTopOf="@+id/resultsTextView"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
-                android:id="@+id/onebtn"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="60dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/circle"
-                android:text="@string/one"
-                android:textColor="#FFFFFF"
-                android:textSize="24sp" />
-
-            <Button
-                android:id="@+id/twobtn"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="60dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/circle"
-                android:text="@string/two"
-                android:textColor="#FFFFFF"
-                android:textSize="24sp" />
-
-            <Button
-                android:id="@+id/threebtn"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="60dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/circle"
-                android:text="@string/three"
-                android:textColor="#FFFFFF"
-                android:textSize="24sp" />
-
-            <Button
-                android:id="@+id/clearbtn"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="60dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/circle"
-                android:backgroundTint="#979797"
-                android:text="@string/clear"
-                android:textColor="#FFFFFF"
-                android:textSize="24sp" />
-        </TableRow>
-
-        <TableRow
+        <TextView
+            android:id="@+id/resultsTextView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:text=""
+            android:maxLines="1"
+            android:lines="1"
+            android:textColor="@color/white"
+            android:textAlignment="textEnd"
+            android:textSize="40sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            />
 
-            <Button
-                android:id="@+id/fourbtn"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="60dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/circle"
-                android:text="@string/four"
-                android:textColor="#FFFFFF"
-                android:textSize="24sp" />
+    </android.support.constraint.ConstraintLayout>
 
-            <Button
-                android:id="@+id/fivebtn"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="60dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/circle"
-                android:text="@string/five"
-                android:textColor="#FFFFFF"
-                android:textSize="24sp" />
+    <LinearLayout
+        style="@style/btnRow">
+        <Button
+            style="@style/CalculatorButton"
+            android:text="" />
 
-            <Button
-                android:id="@+id/sixbtn"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="60dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/circle"
-                android:text="@string/six"
-                android:textColor="#FFFFFF"
-                android:textSize="24sp" />
+        <Button
+            style="@style/CalculatorButton"
+            android:text="" />
 
-            <Button
-                android:id="@+id/addbtn"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="60dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/circle"
-                android:backgroundTint="#979797"
-                android:text="@string/add"
-                android:textColor="#FFFFFF"
-                android:textSize="24sp" />
-        </TableRow>
+        <Button
+            style="@style/CalculatorButton"
+            android:text="" />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <Button
+            style="@style/CalculatorButton"
+            android:textColor="@color/purple_500"
+            android:onClick="delAction"
+            android:text="DEL"/>
 
-            <Button
-                android:id="@+id/sevenbtn"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="60dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/circle"
-                android:text="@string/seven"
-                android:textColor="#FFFFFF"
-                android:textSize="24sp" />
+    </LinearLayout>
+    <LinearLayout
+        style="@style/btnRow">
+        <Button
+            style="@style/CalculatorButton"
+            android:onClick="numberAction"
+            android:text="7" />
 
-            <Button
-                android:id="@+id/eightbtn"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="60dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/circle"
-                android:text="@string/eight"
-                android:textColor="#FFFFFF"
-                android:textSize="24sp" />
+        <Button
+            style="@style/CalculatorButton"
+            android:onClick="numberAction"
+            android:text="8" />
+        <Button
 
-            <Button
-                android:id="@+id/ninebtn"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="60dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/circle"
-                android:text="@string/nine"
-                android:textColor="#FFFFFF"
-                android:textSize="24sp" />
+            style="@style/CalculatorButton"
+            android:onClick="numberAction"
+            android:text="9" />
 
-            <Button
-                android:id="@+id/subsractbtn"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="60dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/circle"
-                android:backgroundTint="#979797"
-                android:text="@string/subtract"
-                android:textColor="#FFFFFF"
-                android:textSize="24sp" />
-        </TableRow>
+        <Button
+            style="@style/CalculatorButton"
+            android:onClick="operationAction"
+            android:text="/" />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    </LinearLayout>
+    <LinearLayout
+        style="@style/btnRow">
+        <Button
+            android:id="@+id/number_4"
+            style="@style/CalculatorButton"
+            android:onClick="numberAction"
+            android:text="4" />
+        <Button
+            android:id="@+id/number_5"
+            style="@style/CalculatorButton"
+            android:onClick="numberAction"
+            android:text="5"/>
 
-            <Button
-                android:id="@+id/dividebtn"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="60dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/circle"
-                android:backgroundTint="#979797"
-                android:text="@string/divide"
-                android:textColor="#FFFFFF"
-                android:textSize="24sp" />
+        <Button
 
-            <Button
-                android:id="@+id/zerobtn"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="60dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/circle"
-                android:onClick="numbersBtn"
-                android:text="@string/zero"
-                android:textColor="#FFFFFF"
-                android:textSize="24sp" />
+            style="@style/CalculatorButton"
+            android:onClick="numberAction"
+            android:text="6" />
 
-            <Button
-                android:id="@+id/multiplybtn"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="60dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/circle"
-                android:backgroundTint="#979797"
-                android:text="@string/multiply"
-                android:textColor="#FFFFFF"
-                android:textSize="24sp" />
+        <Button
 
-            <Button
-                android:id="@+id/equalbtn"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="60dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/circle"
-                android:backgroundTint="#eb1636"
-                android:text="@string/equal"
-                android:textColor="#FFFFFF"
-                android:textSize="24sp" />
-        </TableRow>
+            style="@style/CalculatorButton"
+            android:onClick="operationAction"
+            android:text="x"/>
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </TableLayout>
+    </LinearLayout>
+    <LinearLayout
+        style="@style/btnRow">
+        <Button
 
-    <Button
-        android:id="@+id/deletebtn"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="80dp"
-        android:layout_height="48dp"
-        android:layout_margin="5dp"
-        android:background="@drawable/circle"
-        android:backgroundTint="#eb1636"
-        android:text="@string/delete"
-        android:textColor="#FFFFFF"
-        android:textSize="24sp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/tableLayout"
-        app:layout_constraintEnd_toEndOf="@id/tableLayout" />
+            style="@style/CalculatorButton"
+            android:onClick="numberAction"
+            android:text="1"/>
 
-    <TextView
-        android:id="@+id/input"
-        android:layout_width="match_parent"
-        android:layout_height="84dp"
-        android:lines="2"
-        android:maxLines="2"
-        android:text="Enter an a value"
-        android:textAlignment="textEnd"
-        android:textColor="@color/white"
-        android:textSize="36sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.097"
-        tools:ignore="MissingConstraints" />
+        <Button
 
-    <TextView
-        android:id="@+id/output"
-        android:layout_width="match_parent"
-        android:layout_height="84dp"
-        android:lines="2"
-        android:maxLines="2"
-        android:text=""
-        android:textAlignment="textEnd"
-        android:textColor="@color/white"
-        android:textSize="36sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.262"
-        tools:ignore="MissingConstraints" />
+            style="@style/CalculatorButton"
+            android:onClick="numberAction"
+            android:text="2"/>
+
+        <Button
+
+            style="@style/CalculatorButton"
+            android:onClick="numberAction"
+            android:text="3"/>
+
+        <Button
+
+            style="@style/CalculatorButton"
+            android:onClick="operationAction"
+            android:text="-"/>
+
+    </LinearLayout>
+    <LinearLayout
+        style="@style/btnRow">
+
+        <Button
+            style="@style/CalculatorButton"
+            android:onClick="numberAction"
+            android:text="C"/>
+        <Button
+
+            style="@style/CalculatorButton"
+            android:onClick="numberAction"
+            android:text="0"/>
+        <Button
+
+            style="@style/CalculatorButton"
+            android:onClick="equalsAction"
+            android:text="="/>
+        <Button
+
+            style="@style/CalculatorButton"
+            android:onClick="operationAction"
+            android:text="+"/>
+
+    </LinearLayout>
 
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>
