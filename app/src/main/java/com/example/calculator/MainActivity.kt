@@ -2,8 +2,6 @@ package com.example.calculator
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.annotation.IdRes
-import android.text.Editable
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
@@ -16,8 +14,10 @@ import kotlinx.android.synthetic.main.activity_main.*
  */
 
 class MainActivity : AppCompatActivity() {
-    private var strNumber: String = ""
+    //private var strNumber: String = ""
+    private var strNumber = StringBuilder()
     private lateinit var workingTextView: TextView
+    private lateinit var numberButtons: Array<Button>
     private lateinit var operatorButtons: List<Button>
     private var operator:Operator = Operator.NONE
     private var isOperatorCliked: Boolean = false
@@ -28,92 +28,60 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         workingTextView = findViewById(R.id.workingTextView)
+        val workingTextView: TextView = findViewById(R.id.workingTextView)
 
-        val number9:Button = findViewById(R.id.number9)
-        number9.setOnClickListener {
-            strNumber += "9"
-            workingTextView.text = strNumber
+        numberButtons = arrayOf(number9,number8,number7,number6, number5,number4,number3,number2,number1,number0)
+        for (i in numberButtons){
+            i.setOnClickListener {numberButtonClick(i)}
         }
-        val number8:Button = findViewById(R.id.number8)
-        number8.setOnClickListener {
-            strNumber += "8"
-            workingTextView.text = strNumber
-        }
-        val number7:Button = findViewById(R.id.number7)
-        number7.setOnClickListener {
-            strNumber += "7"
-            workingTextView.text = strNumber
-        }
-        val number6:Button = findViewById(R.id.number6)
-        number6.setOnClickListener {
-            strNumber += "6"
-            workingTextView.text = strNumber
-        }
-        val number5:Button = findViewById(R.id.number5)
-        number5.setOnClickListener {
-            strNumber += "5"
-            workingTextView.text = strNumber
-        }
-        val number4:Button = findViewById(R.id.number4)
-        number4.setOnClickListener {
-            strNumber += "4"
-            workingTextView.text = strNumber
-        }
-        val number3:Button = findViewById(R.id.number3)
-        number3.setOnClickListener {
-            strNumber += "3"
-            workingTextView.text = strNumber
-        }
-        val number2:Button = findViewById(R.id.number2)
-        number2.setOnClickListener {
-            strNumber += "2"
-            workingTextView.text = strNumber
-        }
-        val number1:Button = findViewById(R.id.number1)
-        number1.setOnClickListener {
-            strNumber += "1"
-            workingTextView.text = strNumber
-        }
-        val number0:Button = findViewById(R.id.number0)
-        number0.setOnClickListener {
-            strNumber += "0"
-            workingTextView.text = strNumber
-        }
-
-        operatorButtons = listOf(DIV,MUL,SUB,ADD)
-        for (i in operatorButtons){i.setOnClickListener { operatorButtonClick(i) }}
+        operatorButtons = listOf(DIV,MUL,SUB,ADD,CLEAR)
+        for (i in operatorButtons){i.setOnClickListener {operatorButtonClick(i)}}
         equal.setOnClickListener {buttonEqualClick()}
+        CLEAR.setOnClickListener {buttonClearClick()}
     }
-
+    private fun buttonClearClick(){
+        val result = when(operator){
+            Operator.CLEAR -> 0
+            else -> 0
+        }
+        strNumber.clear()
+        strNumber.append(result.toString())
+        workingTextView.text = strNumber
+        isOperatorCliked = true
+    }
     private fun buttonEqualClick() {
         val operand2 = strNumber.toString().toInt()
-        val result:Int
-        when(operator){
-            Operator.ADD -> result = operand1 + operand2
-            Operator.SUB -> result = operand1 - operand2
-            Operator.MUL -> result = operand1 * operand2
-            Operator.DIV -> result = operand1 / operand2
-            else -> result = 0
-        }
-        resultsTextView.text = result.toString()
-    }
+        val result = when(operator){
+            Operator.ADD -> operand1 + operand2
+            Operator.SUB -> operand1 - operand2
+            Operator.MUL -> operand1 * operand2
+            Operator.DIV -> operand1 / operand2
 
+            else -> 0
+        }
+        strNumber.clear()
+        strNumber.append(result.toString())
+        workingTextView.text = strNumber
+        isOperatorCliked = true
+    }
     private fun operatorButtonClick(btn: Button) {
         if(btn.text == "+") operator = Operator.ADD
         else if(btn.text == "-") operator = Operator.SUB
         else if(btn.text == "*") operator = Operator.MUL
         else if(btn.text == "/") operator = Operator.DIV
+        else if(btn.text == "C") operator = Operator.CLEAR
         else operator = Operator.NONE
         workingTextView.text = ""
         isOperatorCliked = true
     }
-
-    private fun numberButtonClick(btn:Button){
+    private fun numberButtonClick(btn: Button) {
         if(isOperatorCliked){
             operand1 = strNumber.toString().toInt()
+            strNumber.clear()
             isOperatorCliked = false
         }
+        strNumber.append(btn.text)
+        workingTextView.text = strNumber
     }
 }
-
-enum class Operator {ADD,SUB,MUL,DIV,NONE}
+enum class Operator {ADD,SUB,MUL,DIV,NONE,CLEAR}
