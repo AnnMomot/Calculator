@@ -7,12 +7,6 @@ import android.widget.Button
 import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_main.*
 
-/**
- * 1. Handle number buttons
- * 2. Addition operation
- * 3. Subtract operation
- */
-
 class MainActivity : AppCompatActivity() {
     //private var strNumber: String = ""
     private var strNumber = StringBuilder()
@@ -55,13 +49,17 @@ class MainActivity : AppCompatActivity() {
             Operator.ADD -> operand1 + operand2
             Operator.SUB -> operand1 - operand2
             Operator.MUL -> operand1 * operand2
-            Operator.DIV -> operand1 / operand2
-
+            Operator.DIV -> {
+                if (operand2 != 0) {
+                    operand1 / operand2
+                }else{
+                    "error"
+                }
+            }
             else -> 0
         }
-        strNumber.clear()
-        strNumber.append(result.toString())
-        workingTextView.text = strNumber
+
+        workingTextView.text = result.toString()
         isOperatorCliked = true
     }
     private fun operatorButtonClick(btn: Button) {
