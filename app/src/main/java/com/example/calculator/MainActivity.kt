@@ -2,179 +2,81 @@ package com.example.calculator
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.annotation.IdRes
-import android.text.Editable
 import android.view.View
 import android.widget.Button
+import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_main.*
 
+class MainActivity : AppCompatActivity() {
+    private var strNumber = StringBuilder()
+    private lateinit var workingTextView: TextView
+    private lateinit var numberButtons: Array<Button>
+    private lateinit var operatorButtons: List<Button>
+    private var operator:Operator = Operator.NONE
+    private var isOperatorCliked: Boolean = false
+    private var operand1: Int = 0
 
-class MainActivity : AppCompatActivity()
-{
-    private var canAddOperation = false
-    private var canAddDecimal = true
-
-    override fun onCreate(savedInstanceState: Bundle?)
-    {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-       }
 
-    fun numberAction(view: View)
-    {
-        if(view is Button)
-        {
-            if(view.text == ".")
-            {
-                if(canAddDecimal)
-                    workingTextView.append(view.text)
+        workingTextView = findViewById(R.id.workingTextView)
 
-                canAddDecimal = false
-            }
-            else
-                workingTextView.append(view.text)
-
-            canAddOperation = true
+        numberButtons = arrayOf(number9,number8,number7,number6, number5,number4,number3,number2,number1,number0)
+        for (i in numberButtons){
+            i.setOnClickListener {numberButtonClick(i)}
         }
+        operatorButtons = listOf(DIV,MUL,SUB,ADD,CLEAR)
+        for (i in operatorButtons){i.setOnClickListener {operatorButtonClick(i)}}
+        equal.setOnClickListener {buttonEqualClick()}
+        CLEAR.setOnClickListener {buttonClearClick()}
     }
-
-    fun operationAction(view: View)
-    {
-        if(view is Button && canAddOperation)
-        {
-            workingTextView.append(view.text)
-            canAddOperation = false
-            canAddDecimal = true
+    private fun buttonClearClick(){
+        val result = when(operator){
+            Operator.CLEAR -> 0
+            else -> 0
         }
+        strNumber.clear()
+        workingTextView.text = strNumber
+        isOperatorCliked = true
     }
-
-    fun allClear(view: View)
-    {
-        workingTextView.text = ""
-        resultsTextView.text = ""
-    }
-
-    fun delAction(view: View)
-    {
-        val length = workingTextView.length()
-        if(length > 0)
-            workingTextView.text = workingTextView.text.subSequence(0, length - 1)
-    }
-
-    fun equalsAction(view: View)
-    {
-        resultsTextView.text = calculateResults()
-        resultsTextView.text = calculateResults()
-    }
-
-    private fun calculateResults(): String
-    {
-        val digitsOperators = digitsOperators()
-
-        if(digitsOperators.isEmpty())
-
-            return ""
-
-        val timesDivision = timesDivisionCalculate(digitsOperators)
-
-        if(timesDivision.isEmpty())
-
-            return ""
-
-        val result = addSubtractCalculate(timesDivision)
-
-        return result.toString()
-    }
-
-    private fun addSubtractCalculate(oldList: MutableList<Any>): Float
-    {
-        var result = oldList[0] as Float
-
-        for(i in oldList.indices)
-        {
-            if(oldList[i] is Char && i != oldList.lastIndex)
-            {
-                val operator = oldList[i]
-                val nextDigit = oldList[i + 1] as Float
-                if (operator == '+')
-                    result += nextDigit
-                if (operator == '-')
-                    result -= nextDigit
-            }
-        }
-
-        return result
-    }
-
-    private fun timesDivisionCalculate(oldList: MutableList<Any>): MutableList<Any>
-    {
-        var list = oldList
-        while (list.contains('x') || list.contains('/'))
-        {
-            list = calcTimesDiv(list)
-        }
-        return list
-    }
-
-    private fun calcTimesDiv(oldList: MutableList<Any>): MutableList<Any>
-    {
-        val newList = mutableListOf<Any>()
-        var restartIndex = oldList.size
-
-        for(i in oldList.indices)
-        {
-            if(oldList[i] is Char && i != oldList.lastIndex && i < restartIndex)
-            {
-                val operator = oldList[i]
-                val prevDigit = oldList[i - 1] as Float
-                val nextDigit = oldList[i + 1] as Float
-                when(operator)
-                {
-                    'x' ->
-                    {
-                        newList.add(prevDigit * nextDigit)
-                        restartIndex = i + 1
-                    }
-                    '/' ->
-                    {
-                        newList.add(prevDigit / nextDigit)
-                        restartIndex = i + 1
-                    }
-                    else ->
-                    {
-                        newList.add(prevDigit)
-                        newList.add(operator)
-                    }
+    private fun buttonEqualClick() {
+        val operand2 = strNumber.toString().toInt()
+        val result = when(operator){
+            Operator.ADD -> operand1 + operand2
+            Operator.SUB -> operand1 - operand2
+            Operator.MUL -> operand1 * operand2
+            Operator.DIV -> {
+                if (operand2 != 0) {
+                    operand1 / operand2
+                } else {
+                    "error"
                 }
             }
-
-            if(i > restartIndex)
-                newList.add(oldList[i])
+            else -> 0
         }
 
-        return newList
+        workingTextView.text = result.toString()
+        isOperatorCliked = true
     }
-
-    private fun digitsOperators(): MutableList<Any>
-    {
-        val list = mutableListOf<Any>()
-        var currentDigit = ""
-        for(character in workingTextView.text)
-        {
-            if(character.isDigit() || character == '.')
-                currentDigit += character
-            else
-            {
-                list.add(currentDigit.toFloat())
-                currentDigit = ""
-                list.add(character)
-            }
+    private fun operatorButtonClick(btn: Button) {
+        if(btn.text == "+") operator = Operator.ADD
+        else if(btn.text == "-") operator = Operator.SUB
+        else if(btn.text == "*") operator = Operator.MUL
+        else if(btn.text == "/") operator = Operator.DIV
+        else if(btn.text == "C") operator = Operator.CLEAR
+        else operator = Operator.NONE
+        workingTextView.text = ""
+        isOperatorCliked = true
+    }
+    private fun numberButtonClick(btn: Button) {
+        if(isOperatorCliked){
+            operand1 = strNumber.toString().toInt()
+            strNumber.clear()
+            isOperatorCliked = false
         }
-
-        if(currentDigit != "")
-            list.add(currentDigit.toFloat())
-
-        return list
+        strNumber.append(btn.text)
+        workingTextView.text = strNumber
     }
-
 }
+enum class Operator {ADD,SUB,MUL,DIV,NONE,CLEAR}
