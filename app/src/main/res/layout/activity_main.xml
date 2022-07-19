@@ -13,8 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2"
-        android:padding="20dp"
-        tools:ignore="MissingClass">
+        android:padding="20dp" >
 
         <TextView
             android:id="@+id/workingTextView"
@@ -22,7 +21,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:lines="2"
-            android:maxLines="2"
             android:text=""
             android:textAlignment="textEnd"
             android:textColor="@color/white"
@@ -41,24 +39,20 @@
         <Button
             android:id="@+id/number7"
             style="@style/CalculatorButton"
-            android:onClick="numberAction"
             android:text="7" />
 
         <Button
             android:id="@+id/number8"
             style="@style/CalculatorButton"
-            android:onClick="numberAction"
             android:text="8" />
         <Button
             android:id="@+id/number9"
             style="@style/CalculatorButton"
-            android:onClick="numberAction"
             android:text="9" />
 
         <Button
             android:id="@+id/DIV"
             style="@style/CalculatorButton"
-            android:onClick="operationAction"
             android:text="/" />
 
     </LinearLayout>
@@ -68,24 +62,20 @@
         <Button
             android:id="@+id/number4"
             style="@style/CalculatorButton"
-            android:onClick="numberAction"
             android:text="4" />
         <Button
             android:id="@+id/number5"
             style="@style/CalculatorButton"
-            android:onClick="numberAction"
             android:text="5"/>
 
         <Button
             android:id="@+id/number6"
             style="@style/CalculatorButton"
-            android:onClick="numberAction"
             android:text="6" />
 
         <Button
             android:id="@+id/MUL"
             style="@style/CalculatorButton"
-            android:onClick="operationAction"
             android:text="*"/>
 
     </LinearLayout>
@@ -96,25 +86,21 @@
         <Button
             android:id="@+id/number1"
             style="@style/CalculatorButton"
-            android:onClick="numberAction"
             android:text="1"/>
 
         <Button
             android:id="@+id/number2"
             style="@style/CalculatorButton"
-            android:onClick="numberAction"
             android:text="2"/>
 
         <Button
             android:id="@+id/number3"
             style="@style/CalculatorButton"
-            android:onClick="numberAction"
             android:text="3"/>
 
         <Button
             android:id="@+id/SUB"
             style="@style/CalculatorButton"
-            android:onClick="operationAction"
             android:text="-"/>
 
     </LinearLayout>
@@ -125,24 +111,20 @@
         <Button
             android:id="@+id/CLEAR"
             style="@style/CalculatorButton"
-            android:onClick="numberAction"
             android:textColor="@color/purple_500"
             android:text="C"/>
         <Button
             android:id="@+id/number0"
             style="@style/CalculatorButton"
-            android:onClick="numberAction"
             android:text="0"/>
         <Button
             android:id="@+id/equal"
             style="@style/CalculatorButton"
-            android:onClick="equalsAction"
             android:textColor="@color/purple_500"
             android:text="="/>
         <Button
             android:id="@+id/ADD"
             style="@style/CalculatorButton"
-            android:onClick="operationAction"
             android:text="+"/>
 
     </LinearLayout>

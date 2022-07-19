@@ -8,7 +8,6 @@ import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-    //private var strNumber: String = ""
     private var strNumber = StringBuilder()
     private lateinit var workingTextView: TextView
     private lateinit var numberButtons: Array<Button>
@@ -22,7 +21,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         workingTextView = findViewById(R.id.workingTextView)
-        val workingTextView: TextView = findViewById(R.id.workingTextView)
 
         numberButtons = arrayOf(number9,number8,number7,number6, number5,number4,number3,number2,number1,number0)
         for (i in numberButtons){
@@ -39,7 +37,6 @@ class MainActivity : AppCompatActivity() {
             else -> 0
         }
         strNumber.clear()
-        strNumber.append(result.toString())
         workingTextView.text = strNumber
         isOperatorCliked = true
     }
@@ -52,7 +49,7 @@ class MainActivity : AppCompatActivity() {
             Operator.DIV -> {
                 if (operand2 != 0) {
                     operand1 / operand2
-                }else{
+                } else {
                     "error"
                 }
             }
